@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![DecentralChat](https://img.shields.io/badge/DecentralChat-v1.0.0-blue.svg)
+![NusaWhisper](https://img.shields.io/badge/NusaWhisper-v1.0.0-blue.svg)
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
 ![Web3](https://img.shields.io/badge/Web3-Enabled-orange.svg)
 ![Responsive](https://img.shields.io/badge/responsive-mobile%20%7C%20desktop-brightgreen.svg)
