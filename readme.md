@@ -93,8 +93,8 @@ DecentralChat adalah aplikasi chat terdesentralisasi yang menggabungkan teknolog
 
 ### Arsitektur Data
 
-- **Peer-to-Peer**: Tidak ada server terpusat
-- **Real-time Sync**: Sinkronisasi data real-time via GUN.js
+- **Peer-to-Peer**: Tidak ada server terpusat (Decentralized)
+- **Real-time Sync**: Sinkronisasi data real-time via GUN.js (Decentralized Database)
 - **Distributed Storage**: Penyimpanan terdistribusi di multiple peer
 - **Cryptographic Identity**: Identitas berdasarkan alamat Ethereum
 
@@ -123,7 +123,7 @@ graph TD
     B --> C[Broadcast to Peers]
     C --> D[GUN.js Network]
     D --> E[Other Peers Receive]
-    E --> F[Update UI]
+    E --> F[Update]
 ```
 
 ## Instalasi & Penggunaan
@@ -278,7 +278,6 @@ python3 -m http.server 5000
 - ✅ MetaMask authentication integration
 - ✅ Responsive design (desktop & mobile)
 - ✅ Dark/Light theme support
-- ✅ Multi-language support (EN/ID)
 - ✅ Direct messaging system
 - ✅ Invite system with codes
 - ✅ User presence tracking
