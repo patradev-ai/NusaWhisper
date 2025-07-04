@@ -89,8 +89,7 @@ DecentralChat adalah aplikasi chat terdesentralisasi yang menggabungkan teknolog
 
 - **GUN.js**: Database peer-to-peer untuk penyimpanan terdesentralisasi
 - **MetaMask**: Autentikasi dan manajemen wallet
-- **HTTP Server**: Server statis Python untuk development
-- **Replit**: Platform hosting dan deployment
+- **Github**: Platform hosting dan deployment
 
 ### Arsitektur Data
 
