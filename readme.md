@@ -29,54 +29,54 @@
 - [Lisensi](#lisensi)
 - [Dukungan & Donasi](#dukungan--donasi)
 
-## 🚀 Tentang Proyek
+## Tentang Proyek
 
 DecentralChat adalah aplikasi chat terdesentralisasi yang menggabungkan teknologi blockchain dan peer-to-peer messaging. Aplikasi ini menggunakan MetaMask untuk autentikasi pengguna dan GUN.js untuk penyimpanan data terdesentralisasi serta messaging real-time, menciptakan pengalaman chat Web3-native tanpa bergantung pada server terpusat tradisional.
 
-### 🎯 Tujuan Proyek
+### Tujuan Proyek
 
 - Memberikan platform komunikasi yang benar-benar terdesentralisasi
 - Memastikan privasi dan keamanan pengguna melalui teknologi blockchain
 - Menyediakan pengalaman chat yang responsif dan modern
 - Mendemonstrasikan implementasi Web3 dalam aplikasi praktis
 
-## ✨ Fitur Utama
+## Fitur Utama
 
-### 🏠 Sistem Ruang Chat
+### Sistem Ruang Chat
 
 - **Buat Ruang**: Pengguna dapat membuat ruang chat publik atau privat
 - **Gabung via Undangan**: Sistem kode undangan untuk ruang privat
 - **Manajemen Ruang**: Keluar dari ruang, hapus chat, dan kontrol administrator
 - **Undang Pengguna**: Undang pengguna lain menggunakan alamat Ethereum
 
-### 💬 Messaging
+### Messaging
 
 - **Real-time**: Pesan tersinkronisasi secara real-time di seluruh peer
 - **Direct Message**: Chat langsung antar pengguna
 - **Riwayat Pesan**: Penyimpanan pesan persistent melalui jaringan P2P
 - **Notifikasi Suara**: Notifikasi audio untuk pesan baru
 
-### 👤 Manajemen Pengguna
+### Manajemen Pengguna
 
 - **Autentikasi Wallet**: Login menggunakan MetaMask
 - **Status Online**: Kontrol visibilitas status online
 - **Nickname**: Sistem nama panggilan yang dapat disesuaikan
 - **Profil Pengguna**: Informasi pengguna dengan alamat Ethereum
 
-### 🎨 Antarmuka & UX
+### Antarmuka & UX
 
 - **Responsive Design**: Mendukung desktop dan mobile
 - **Dark/Light Mode**: Sistem tema yang dapat diubah
 - **Sidebar Navigasi**: Navigasi terstruktur untuk ruang dan kontak
 
-### 🔒 Keamanan & Privasi
+### Keamanan & Privasi
 
 - **Enkripsi Wallet**: Autentikasi berbasis cryptographic signature
 - **Decentralized Storage**: Data disimpan di jaringan P2P, bukan server terpusat
 - **No Registration**: Tidak perlu registrasi tradisional
 - **Anonymous**: Identitas berdasarkan alamat wallet
 
-## 🛠 Teknologi yang Digunakan
+## Teknologi yang Digunakan
 
 ### Frontend
 
@@ -99,7 +99,7 @@ DecentralChat adalah aplikasi chat terdesentralisasi yang menggabungkan teknolog
 - **Distributed Storage**: Penyimpanan terdistribusi di multiple peer
 - **Cryptographic Identity**: Identitas berdasarkan alamat Ethereum
 
-## ⚙️ Cara Kerja
+## Cara Kerja
 
 ### 1. Autentikasi
 
@@ -127,7 +127,7 @@ graph TD
     E --> F[Update UI]
 ```
 
-## 📦 Instalasi & Penggunaan
+## Instalasi & Penggunaan
 
 ### Prasyarat
 
@@ -163,7 +163,7 @@ http://localhost:5000
 3. Aplikasi akan berjalan di port 5000
 4. Akses melalui URL Replit yang disediakan
 
-## 📱 Panduan Penggunaan
+## Panduan Penggunaan
 
 ### Memulai Chat
 
@@ -185,7 +185,7 @@ http://localhost:5000
 - **Pengaturan**: Klik avatar pengguna untuk akses pengaturan
 - **Ganti Theme**: Klik icon bulan/matahari di header
 
-## 🏗 Arsitektur Sistem
+## Arsitektur Sistem
 
 ### Struktur Proyek
 
@@ -232,7 +232,7 @@ decentralchat/
 - Error handling global
 - Application lifecycle
 
-## 👨‍💻 Pengembangan
+## Pengembangan
 
 ### Development Setup
 
@@ -277,7 +277,7 @@ python3 -m http.server 5000
 - Cleanup otomatis untuk data lama
 - Rate limiting untuk mencegah spam
 
-## 📈 Changelog
+## Changelog
 
 ### v1.0.0 (July 4, 2025)
 
@@ -292,7 +292,7 @@ python3 -m http.server 5000
 - ✅ User presence tracking
 - ✅ Real-time message synchronization
 
-#### 🔧 Technical Implementation
+#### Technical Implementation
 
 - ✅ GUN.js P2P database integration
 - ✅ Modular JavaScript architecture
@@ -301,14 +301,14 @@ python3 -m http.server 5000
 - ✅ Local storage for user preferences
 - ✅ Automatic cleanup and optimization
 
-#### 🚀 Features Added
+#### Features Added
 
 - **User Management**: Online status, nicknames, profiles
 - **Messaging**: Real-time chat with message history
 - **UI/UX**: Modern, responsive interface with accessibility
 - **Security**: Wallet-based authentication and message signing
 
-#### 🐛 Bug Fixes
+#### Bug Fixes
 
 - Resolved online status persistence issues
 - Corrected mobile sidebar navigation
@@ -324,7 +324,7 @@ python3 -m http.server 5000
 - **July 4, 2025**: Theme system and internationalization
 - **July 4, 2025**: Testing, optimization, and bug fixes
 
-## 🤝 Kontribusi
+## Kontribusi
 
 Kontribusi sangat diterima! Berikut cara untuk berkontribusi:
 
@@ -350,23 +350,23 @@ Kontribusi sangat diterima! Berikut cara untuk berkontribusi:
 - [ ] Integration dengan ENS domains
 - [ ] Custom peer discovery options
 
-## 📄 Lisensi
+## Lisensi
 
 Distributed under the MIT License. See `LICENSE` for more information.
 
-## 💖 Dukungan & Donasi
+## Dukungan & Donasi
 
 Jika proyek ini bermanfaat untuk Anda, pertimbangkan untuk memberikan dukungan:
 
-### 🌟 Social Media
+### Social Media
 
 - **Instagram**: [@patradev.id](https://www.instagram.com/patradev.id/)
 
-### 💰 Donasi
+### Donasi
 
 - **Crypto**: -
-- **Trakteer**: -
-- **Saweria**: -
+- **Trakteer**: https://trakteer.id/patradev
+- **Saweria**: https://saweria.co/patradev
 - **PayPal**: -
 
 ### ⭐ Star Repository

@@ -206,17 +206,6 @@ class Auth {
     }
   }
 
-  // Generate a simple hash for message signing without MetaMask popup
-  generateMessageHash(data) {
-    let hash = 0;
-    for (let i = 0; i < data.length; i++) {
-      const char = data.charCodeAt(i);
-      hash = (hash << 5) - hash + char;
-      hash = hash & hash; // Convert to 32-bit integer
-    }
-    return `auto_${Math.abs(hash).toString(16)}`;
-  }
-
   // Generate a unique user ID based on address
   generateUserId(address) {
     return `user_${address.toLowerCase().substring(2, 10)}`;
@@ -251,3 +240,6 @@ class Auth {
     }
   }
 }
+
+// Export for use in other modules
+window.Auth = Auth;

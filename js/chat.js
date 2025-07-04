@@ -782,22 +782,6 @@ class Chat {
     }
   }
 
-  async switchToGlobalChat() {
-    this.currentChatType = "global";
-    this.directChatPartner = null;
-    this.directMessagesRef = null;
-
-    // Clear current messages
-    const messagesContainer = document.getElementById("messagesContainer");
-    messagesContainer.innerHTML = "";
-
-    // Load global messages
-    await this.loadRecentMessages();
-
-    // Update UI
-    this.updateChatHeader();
-  }
-
   generateDirectChatId(address1, address2) {
     const addresses = [address1.toLowerCase(), address2.toLowerCase()].sort();
     return `${addresses[0]}_${addresses[1]}`;
@@ -831,18 +815,20 @@ class Chat {
   }
 
   updateChatHeader(partnerAddress = null) {
-    const chatTitle = document.querySelector("#chatScreen h3");
-    const chatSubtitle = document.querySelector("#chatScreen p");
+    const chatTitle = document.getElementById("chatTitle");
+    const onlineCount = document.getElementById("onlineCount");
 
     if (partnerAddress) {
       const auth = new Auth(this.gun);
       auth.getUserNickname(partnerAddress).then((nickname) => {
-        chatTitle.textContent = `Direct Chat`;
-        chatSubtitle.innerHTML = `with ${nickname}`;
+        chatTitle.textContent = `Direct Chat with ${nickname}`;
       });
     } else {
-      chatTitle.textContent = "Global Chat";
-      chatSubtitle.innerHTML = `<span id="onlineCount">${this.onlineUsers.size}</span> online`;
+      chatTitle.textContent = 
+        this.currentRoom.charAt(0).toUpperCase() + this.currentRoom.slice(1);
+      if (onlineCount) {
+        onlineCount.textContent = this.onlineUsers.size;
+      }
     }
   }
 
@@ -873,3 +859,6 @@ class Chat {
     }
   }
 }
+
+// Export for use in other modules
+window.Chat = Chat;

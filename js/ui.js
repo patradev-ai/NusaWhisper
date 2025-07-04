@@ -597,9 +597,5 @@ class UI {
   }
 }
 
-// Initialize responsive handlers when DOM is loaded
-document.addEventListener("DOMContentLoaded", () => {
-  if (window.ui) {
-    window.ui.initResponsiveHandlers();
-  }
-});
+// Export for use in other modules
+window.UI = UI;

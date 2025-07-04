@@ -1,0 +1,108 @@
+{
+  "app": {
+    "title": "NusaWhisper",
+    "subtitle": "Chat Web3"
+  },
+  "auth": {
+    "welcome": "Selamat datang di NusaWhisper",
+    "description": "Hubungkan dompet MetaMask Anda untuk bergabung dengan jaringan chat terdesentralisasi",
+    "connectWallet": "Hubungkan MetaMask",
+    "connecting": "Menghubungkan ke MetaMask...",
+    "welcomeBack": "Selamat datang kembali!",
+    "connected": "Berhasil terhubung!",
+    "disconnected": "Berhasil terputus",
+    "accountChanged": "Akun berubah, menghubungkan ulang...",
+    "noMetaMask": "MetaMask tidak terinstal. Silakan instal MetaMask untuk melanjutkan.",
+    "noAccounts": "Tidak ada akun ditemukan. Silakan buka kunci MetaMask."
+  },
+  "navigation": {
+    "rooms": "Ruangan",
+    "directMessages": "Pesan Langsung",
+    "onlineUsers": "Pengguna Online",
+    "contacts": "Kontak"
+  },
+  "actions": {
+    "createRoom": "Buat Ruangan",
+    "joinByInvite": "Gabung dengan Undangan",
+    "directChat": "Chat Langsung",
+    "sendMessage": "Kirim Pesan",
+    "save": "Simpan",
+    "cancel": "Batal",
+    "copy": "Salin",
+    "close": "Tutup",
+    "join": "Gabung",
+    "create": "Buat",
+    "invite": "Undang",
+    "leave": "Keluar",
+    "clear": "Hapus",
+    "disconnect": "Putuskan"
+  },
+  "forms": {
+    "roomName": "Nama Ruangan",
+    "enterRoomName": "Masukkan nama ruangan",
+    "inviteCode": "Kode Undangan",
+    "enterInviteCode": "Masukkan kode undangan",
+    "walletAddress": "Alamat Dompet",
+    "enterWalletAddress": "Masukkan alamat dompet",
+    "nickname": "Nama Panggilan",
+    "enterNickname": "Masukkan nama panggilan Anda",
+    "privateRoom": "Ruangan Pribadi",
+    "typeMessage": "Ketik pesan...",
+    "ethAddress": "0x... alamat dompet"
+  },
+  "status": {
+    "online": "Online",
+    "offline": "Offline",
+    "onlineStatus": "Status Online",
+    "joined": "Bergabung",
+    "participants": "peserta"
+  },
+  "modals": {
+    "profileSettings": "Pengaturan Profil",
+    "createNewRoom": "Buat Ruangan Baru",
+    "joinByInvite": "Gabung dengan Undangan",
+    "roomOptions": "Opsi Ruangan",
+    "startDirectChat": "Mulai Chat Langsung",
+    "userInfo": "Info Pengguna",
+    "inviteToRoom": "Undang ke Ruangan"
+  },
+  "messages": {
+    "enterNickname": "Silakan masukkan nama panggilan",
+    "enterRoomName": "Silakan masukkan nama ruangan",
+    "enterInviteCode": "Silakan masukkan kode undangan",
+    "enterWalletAddress": "Silakan masukkan alamat dompet",
+    "invalidWalletAddress": "Alamat dompet tidak valid",
+    "cannotChatYourself": "Tidak dapat memulai chat dengan diri sendiri",
+    "cannotLeaveGeneral": "Tidak dapat keluar dari ruangan umum",
+    "nicknameSaved": "Nama panggilan berhasil disimpan!",
+    "roomCreated": "Ruangan berhasil dibuat!",
+    "joinedRoom": "Berhasil bergabung ke ruangan!",
+    "leftRoom": "Berhasil keluar dari ruangan",
+    "directChatStarted": "Chat langsung dimulai",
+    "inviteCodeCopied": "Kode undangan disalin",
+    "addressCopied": "Alamat disalin ke clipboard!",
+    "chatCleared": "Chat berhasil dihapus",
+    "confirmClear": "Apakah Anda yakin ingin menghapus semua pesan di ruangan ini? Tindakan ini tidak dapat dibatalkan.",
+    "confirmLeave": "Apakah Anda yakin ingin keluar dari ruangan ini?",
+    "failedSendMessage": "Gagal mengirim pesan",
+    "failedCreateRoom": "Gagal membuat ruangan",
+    "failedJoinRoom": "Gagal bergabung ke ruangan",
+    "failedStartChat": "Gagal memulai chat langsung",
+    "failedSaveNickname": "Gagal menyimpan nama panggilan",
+    "failedClearChat": "Gagal menghapus chat",
+    "failedLeaveRoom": "Gagal keluar dari ruangan",
+    "failedGenerateInvite": "Gagal membuat undangan",
+    "failedUpdateStatus": "Gagal memperbarui status",
+    "waitBeforeSending": "Silakan tunggu sebentar sebelum mengirim pesan lain",
+    "switchedTheme": "Beralih ke tema {theme}",
+    "statusSetTo": "Status diatur ke {status}"
+  },
+  "rooms": {
+    "generateInvite": "Buat Undangan",
+    "clearChat": "Hapus Chat",
+    "leaveRoom": "Keluar Ruangan",
+    "inviteUsers": "Undang Pengguna",
+    "roomMembers": "Anggota Ruangan",
+    "onlyCreatorCanClear": "Hanya pembuat ruangan yang dapat menghapus chat"
+  }
+}

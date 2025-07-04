@@ -600,3 +600,6 @@ window.addEventListener("beforeunload", () => {
     window.app.chat.setOnlineStatus(false);
   }
 });
+
+// Export for global access
+window.DecentralChat = DecentralChat;

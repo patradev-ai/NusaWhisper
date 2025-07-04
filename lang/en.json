@@ -1,0 +1,108 @@
+{
+  "app": {
+    "title": "NusaWhisper",
+    "subtitle": "Web3 Chat"
+  },
+  "auth": {
+    "welcome": "Welcome to NusaWhisper",
+    "description": "Connect your MetaMask wallet to join the decentralized chat network",
+    "connectWallet": "Connect MetaMask",
+    "connecting": "Connecting to MetaMask...",
+    "welcomeBack": "Welcome back!",
+    "connected": "Connected successfully!",
+    "disconnected": "Disconnected successfully",
+    "accountChanged": "Account changed, reconnecting...",
+    "noMetaMask": "MetaMask is not installed. Please install MetaMask to continue.",
+    "noAccounts": "No accounts found. Please unlock MetaMask."
+  },
+  "navigation": {
+    "rooms": "Rooms",
+    "directMessages": "Direct Messages",
+    "onlineUsers": "Online Users",
+    "contacts": "Contacts"
+  },
+  "actions": {
+    "createRoom": "Create Room",
+    "joinByInvite": "Join by Invite",
+    "directChat": "Direct Chat",
+    "sendMessage": "Send Message",
+    "save": "Save",
+    "cancel": "Cancel",
+    "copy": "Copy",
+    "close": "Close",
+    "join": "Join",
+    "create": "Create",
+    "invite": "Invite",
+    "leave": "Leave",
+    "clear": "Clear",
+    "disconnect": "Disconnect"
+  },
+  "forms": {
+    "roomName": "Room Name",
+    "enterRoomName": "Enter room name",
+    "inviteCode": "Invite Code",
+    "enterInviteCode": "Enter invite code",
+    "walletAddress": "Wallet Address",
+    "enterWalletAddress": "Enter wallet address",
+    "nickname": "Nickname",
+    "enterNickname": "Enter your nickname",
+    "privateRoom": "Private Room",
+    "typeMessage": "Type a message...",
+    "ethAddress": "0x... wallet address"
+  },
+  "status": {
+    "online": "Online",
+    "offline": "Offline",
+    "onlineStatus": "Online Status",
+    "joined": "Joined",
+    "participants": "participants"
+  },
+  "modals": {
+    "profileSettings": "Profile Settings",
+    "createNewRoom": "Create New Room",
+    "joinByInvite": "Join by Invite",
+    "roomOptions": "Room Options",
+    "startDirectChat": "Start Direct Chat",
+    "userInfo": "User Info",
+    "inviteToRoom": "Invite to Room"
+  },
+  "messages": {
+    "enterNickname": "Please enter a nickname",
+    "enterRoomName": "Please enter a room name",
+    "enterInviteCode": "Please enter an invite code",
+    "enterWalletAddress": "Please enter a wallet address",
+    "invalidWalletAddress": "Invalid wallet address",
+    "cannotChatYourself": "Cannot start chat with yourself",
+    "cannotLeaveGeneral": "Cannot leave the general room",
+    "nicknameSaved": "Nickname saved successfully!",
+    "roomCreated": "Room created successfully!",
+    "joinedRoom": "Joined room successfully!",
+    "leftRoom": "Left room successfully",
+    "directChatStarted": "Direct chat started",
+    "inviteCodeCopied": "Invite code copied",
+    "addressCopied": "Address copied to clipboard!",
+    "chatCleared": "Chat cleared successfully",
+    "confirmClear": "Are you sure you want to clear all messages in this room? This action cannot be undone.",
+    "confirmLeave": "Are you sure you want to leave this room?",
+    "failedSendMessage": "Failed to send message",
+    "failedCreateRoom": "Failed to create room",
+    "failedJoinRoom": "Failed to join room",
+    "failedStartChat": "Failed to start direct chat",
+    "failedSaveNickname": "Failed to save nickname",
+    "failedClearChat": "Failed to clear chat",
+    "failedLeaveRoom": "Failed to leave room",
+    "failedGenerateInvite": "Failed to generate invite",
+    "failedUpdateStatus": "Failed to update status",
+    "waitBeforeSending": "Please wait a moment before sending another message",
+    "switchedTheme": "Switched to {theme} theme",
+    "statusSetTo": "Status set to {status}"
+  },
+  "rooms": {
+    "generateInvite": "Generate Invite",
+    "clearChat": "Clear Chat",
+    "leaveRoom": "Leave Room",
+    "inviteUsers": "Invite Users",
+    "roomMembers": "Room Members",
+    "onlyCreatorCanClear": "Only room creator can clear chat"
+  }
+}
