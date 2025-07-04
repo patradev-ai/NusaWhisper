@@ -359,10 +359,11 @@ Jika proyek ini bermanfaat untuk Anda, pertimbangkan untuk memberikan dukungan:
 
 ### Donasi
 
-- **Crypto**: -
+- **Bitcoin**: 12EnneEriimQey3cqvxtv4ZUbvpmEbDinL
+- **ETH ERC20**: 0x471a58a2b5072cb50e3761dba3e15d19f080bdbc
 - **Trakteer**: https://trakteer.id/patradev
 - **Saweria**: https://saweria.co/patradev
-- **PayPal**: -
+- **PayPal**: https://paypal.me/rayocta303
 
 ### ⭐ Star Repository
 
@@ -374,6 +375,6 @@ Jangan lupa untuk memberikan star pada repository ini jika Anda merasa terbantu!
 
 **Dibuat dengan ❤️ untuk komunitas Web3**
 
-[⬆ Kembali ke atas](#nusawhisper---decentralized-room-based-chat-application)
+[Kembali ke atas](#nusawhisper---decentralized-room-based-chat-application)
 
 </div>
