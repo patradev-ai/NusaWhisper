@@ -156,13 +156,6 @@ python3 -m http.server 5000
 http://localhost:5000
 ```
 
-### Deploy di Replit
-
-1. Fork project di Replit
-2. Klik tombol "Run"
-3. Aplikasi akan berjalan di port 5000
-4. Akses melalui URL Replit yang disediakan
-
 ## Panduan Penggunaan
 
 ### Memulai Chat
