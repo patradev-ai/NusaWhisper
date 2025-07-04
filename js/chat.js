@@ -353,9 +353,7 @@ class Chat {
     messageContent.className = "flex flex-col max-w-xs lg:max-w-md";
 
     const messageBubble = document.createElement("div");
-    messageBubble.className = `message-bubble p-3 ${
-      isOwn ? "message-own text-white" : "message-other text-gray-700"
-    }`;
+    messageBubble.className = `message-bubble ${isOwn ? "own" : "other"}`;
 
     const messageText = document.createElement("div");
     messageText.className = "break-words";
@@ -363,14 +361,15 @@ class Chat {
 
     const messageInfo = document.createElement("div");
     messageInfo.className = `message-timestamp flex items-center gap-2 mt-1 ${
-      isOwn ? "text-blue-100" : "text-gray-500 dark:text-gray-400"
+      isOwn
+        ? "text-gray-600 dark:text-blue-100"
+        : "text-gray-600 dark:text-gray-400"
     }`;
 
     const timestamp = document.createElement("span");
     timestamp.textContent = Utils.formatTime(message.timestamp);
 
     const senderInfo = document.createElement("span");
-    // Use nickname if available, otherwise use short address
     const senderName = message.senderNickname || message.senderShort;
     senderInfo.textContent = senderName;
 
@@ -379,7 +378,6 @@ class Chat {
       messageInfo.appendChild(senderInfo);
     }
 
-    // Add signature indicator (automatic signing)
     if (message.signature) {
       const signatureIcon = document.createElement("i");
       signatureIcon.className = "fas fa-check-circle text-xs opacity-75";
@@ -391,12 +389,15 @@ class Chat {
     messageContent.appendChild(messageBubble);
     messageContent.appendChild(messageInfo);
 
-    if (!isOwn) {
-      messageContainer.appendChild(avatar);
-    }
-    messageContainer.appendChild(messageContent);
+    // Struktur bubble + avatar
     if (isOwn) {
+      // Untuk pesan sendiri, avatar di kanan
+      messageContainer.appendChild(messageContent);
       messageContainer.appendChild(avatar);
+    } else {
+      // Untuk pesan orang lain, avatar di kiri
+      messageContainer.appendChild(avatar);
+      messageContainer.appendChild(messageContent);
     }
 
     return messageContainer;
@@ -824,7 +825,7 @@ class Chat {
         chatTitle.textContent = `Direct Chat with ${nickname}`;
       });
     } else {
-      chatTitle.textContent = 
+      chatTitle.textContent =
         this.currentRoom.charAt(0).toUpperCase() + this.currentRoom.slice(1);
       if (onlineCount) {
         onlineCount.textContent = this.onlineUsers.size;
