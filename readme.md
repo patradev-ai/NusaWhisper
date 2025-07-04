@@ -3,9 +3,9 @@
 <div align="center">
 
 ![NusaWhisper](https://img.shields.io/badge/NusaWhisper-v1.1.0-blue.svg)
-![License](https://img.shields.io/badge/license-MIT-green.svg)
+![License](https://img.shields.io/badge/License-MIT-green.svg)
 ![Web3](https://img.shields.io/badge/Web3-Enabled-orange.svg)
-![Responsive](https://img.shields.io/badge/responsive-mobile%20%7C%20desktop-brightgreen.svg)
+![Responsive](https://img.shields.io/badge/Responsive-Mobile%20%7C%20Desktop-white.svg)
 
 **Aplikasi chat terdesentralisasi berbasis Web3 dengan autentikasi wallet MetaMask dan sistem ruang chat**
 
@@ -130,7 +130,7 @@ graph TD
 
 ### Prasyarat
 
-- Browser modern dengan dukungan Web3
+- Browser dengan dukungan Web3 (Tested on Chrome, Firefox, Safari)
 - MetaMask extension terinstall
 - Koneksi internet untuk peer discovery
 
