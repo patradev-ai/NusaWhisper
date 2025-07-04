@@ -324,6 +324,10 @@ python3 -m http.server 5000
 - **July 4, 2025**: Theme system and internationalization
 - **July 4, 2025**: Testing, optimization, and bug fixes
 
+- **July 5, 2025**: Fixing Dark & Light Theme
+- **July 5, 2025**: Fixing Direct Messaging
+- **July 5, 2025**: UI/UX Improvements
+
 ## Kontribusi
 
 Kontribusi sangat diterima! Berikut cara untuk berkontribusi:
