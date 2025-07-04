@@ -114,16 +114,17 @@ class Auth {
     }
   }
 
-  // Generate a simple hash for message signing without MetaMask popup
-  generateMessageHash(data) {
+  generateMessageHash(message) {
     let hash = 0;
-    for (let i = 0; i < data.length; i++) {
-      const char = data.charCodeAt(i);
-      hash = (hash << 5) - hash + char;
+    for (let i = 0; i < message.length; i++) {
+      const char = message.charCodeAt(i);
+      hash = ((hash << 5) - hash) + char;
       hash = hash & hash; // Convert to 32-bit integer
     }
-    return `auto_${Math.abs(hash).toString(16)}`;
+    return Math.abs(hash).toString(16);
   }
+
+  
 
   async disconnect() {
     try {

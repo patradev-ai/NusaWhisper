@@ -400,4 +400,6 @@ class Utils {
 }
 
 // Export for use in other modules
-window.Utils = Utils;
+if (typeof window.Utils === 'undefined') {
+  window.Utils = Utils;
+}

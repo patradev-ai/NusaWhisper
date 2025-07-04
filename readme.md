@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![NusaWhisper](https://img.shields.io/badge/NusaWhisper-v1.0.0-blue.svg)
+![NusaWhisper](https://img.shields.io/badge/NusaWhisper-v1.1.0-blue.svg)
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
 ![Web3](https://img.shields.io/badge/Web3-Enabled-orange.svg)
 ![Responsive](https://img.shields.io/badge/responsive-mobile%20%7C%20desktop-brightgreen.svg)
@@ -182,17 +182,21 @@ http://localhost:5000
 ### Struktur Proyek
 
 ```
-decentralchat/
+NusaWhisper/
 ├── css/
-│   └── styles.css          # Styling dan tema
+│   └── styles.css              # Styling dan tema
 ├── js/
-│   ├── app.js             # Controller utama aplikasi
-│   ├── auth.js            # Modul autentikasi MetaMask
-│   ├── chat.js            # Modul messaging
-│   ├── ui.js              # Manajemen antarmuka pengguna
-│   ├── utils.js           # Utility functions
-├── index.html             # Entry point aplikasi
-└── README.md              # Dokumentasi
+│   ├── app.js                  # Controller utama aplikasi
+│   ├── auth.js                 # Modul autentikasi MetaMask
+│   ├── chat.js                 # Modul messaging
+│   ├── ui.js                   # Manajemen antarmuka pengguna
+│   ├── utils.js                # Utility functions
+│   └── i18n.js                 # Inisialisasi dan handler i18n
+├── lang/
+│   ├── en.json                 # Bahasa Inggris
+│   └── id.json                 # Bahasa Indonesia
+├── index.html                  # Entry point aplikasi
+└── README.md                   # Dokumentasi
 ```
 
 ### Komponen Utama
@@ -224,6 +228,13 @@ decentralchat/
 - Error handling global
 - Application lifecycle
 
+### 5. Internationalization Module (i18n) (`js/i18n.js`)
+
+- Dukungan multi-bahasa (EN & ID)
+- Pemrosesan dan pemetaan teks berdasarkan data-i18n
+- Pergantian bahasa dinamis tanpa reload
+- File konfigurasi terpisah: lang/en.json, lang/id.json
+
 ## Pengembangan
 
 ### Development Setup
@@ -251,14 +262,14 @@ python3 -m http.server 5000
 ### Kontribusi
 
 1. Fork repository
-2. Buat branch fitur (`git checkout -b feature/AmazingFeature`)
-3. Commit perubahan (`git commit -m 'Add some AmazingFeature'`)
-4. Push ke branch (`git push origin feature/AmazingFeature`)
+2. Buat branch fitur (`git checkout -b feature/NamaFitur`)
+3. Commit perubahan (`git commit -m 'Add some NamaFitur'`)
+4. Push ke branch (`git push origin feature/NamaFitur`)
 5. Buat Pull Request
 
 ### Testing
 
-- Test manual di browser modern
+- Test manual di browser
 - Verify MetaMask integration
 - Test responsive design di multiple screen size
 - Validate P2P connectivity
@@ -270,6 +281,23 @@ python3 -m http.server 5000
 - Rate limiting untuk mencegah spam
 
 ## Changelog
+
+### v1.1.0 (July 5, 2025)
+
+#### ✨ New Features
+
+- ✅ **Chat Room System**: Dukungan untuk ruang obrolan publik & switching antar ruang
+- ✅ **Multi-language Support**: Bahasa Inggris & Indonesia (i18n)
+- ✅ **UI/UX Enhancement**: Tampilan lebih bersih, konsisten, dan mobile-friendly
+
+#### 🔧 Technical Updates
+
+- ✅ Penambahan `i18n.js` dan folder `lang/` (`en.json`, `id.json`) untuk sistem multi-bahasa
+- ✅ Struktur HTML dan komponen dirapikan untuk skalabilitas
+- ✅ Konsistensi styling untuk dark/light mode diperbaiki
+- ✅ Modularisasi UI untuk pengelolaan ruang & anggota yang lebih efisien
+
+---
 
 ### v1.0.0 (July 4, 2025)
 
@@ -298,6 +326,8 @@ python3 -m http.server 5000
 - **Messaging**: Real-time chat with message history
 - **UI/UX**: Modern, responsive interface with accessibility
 - **Security**: Wallet-based authentication and message signing
+- **Chat Rooms**: Create and switch between multiple public & private chat rooms (NEW)
+- **Multi-language Support**: Interface available in Bahasa Indonesia and English (NEW)
 
 #### Bug Fixes
 
@@ -305,6 +335,14 @@ python3 -m http.server 5000
 - Corrected mobile sidebar navigation
 - Fixed message duplicate prevention
 - Improved error handling across modules
+- Invite room using Ethereum address
+
+#### Known Issues
+
+- **Moderation**: Moderation features are not yet implemented
+- **Create Room**: Cannot create rooms with duplicate names
+- **Room Invite**: Invite code functionality is currently broken
+- **Online Status**: Online status may not update correctly when entering a room
 
 ### Development History
 
@@ -318,6 +356,10 @@ python3 -m http.server 5000
 - **July 5, 2025**: Fixing Dark & Light Theme
 - **July 5, 2025**: Fixing Direct Messaging
 - **July 5, 2025**: UI/UX Improvements
+- **July 5, 2025**: Added Chat Room feature (basic implementation)
+- **July 5, 2025**: Fixing Chat Room feature
+- **July 5, 2025**: UI/UX Improvements for Chat Room
+- **July 5, 2025**: Introduced multi-language support (Bahasa Indonesia & English)
 
 ## Kontribusi
 
@@ -340,7 +382,6 @@ Kontribusi sangat diterima! Berikut cara untuk berkontribusi:
 
 ### Development Roadmap
 
-- [ ] Mobile app dengan Capacitor
 - [ ] Enhanced encryption untuk message
 - [ ] Integration dengan ENS domains
 - [ ] Custom peer discovery options

@@ -11,14 +11,30 @@ class DecentralChat {
 
   async init() {
     try {
-      // Initialize GUN.js
+      // Initialize GUN.js with better error handling
       this.gun = GUN(["https://gun-manhattan.herokuapp.com/gun"]);
       this.chatRef = this.gun.get("decentralchat-rooms");
 
-      // Initialize modules
-      this.auth = new Auth(this.gun);
-      this.chat = new Chat(this.gun, this.chatRef);
-      this.ui = new UI();
+      // Initialize i18n
+      this.i18n = new I18n();
+      try {
+        await this.i18n.init();
+      } catch (error) {
+        console.warn("I18n initialization failed, using fallback:", error);
+      }
+
+      // Initialize modules with error handling
+      try {
+        this.auth = new Auth(this.gun);
+        this.chat = new Chat(this.gun, this.chatRef);
+        this.ui = new UI();
+        if (this.i18n) {
+          this.ui.setI18n(this.i18n);
+        }
+      } catch (error) {
+        console.error("Failed to initialize modules:", error);
+        throw error;
+      }
 
       // Set up event listeners
       this.setupEventListeners();
@@ -30,7 +46,9 @@ class DecentralChat {
       console.log("NusaWhisper initialized successfully");
     } catch (error) {
       console.error("Failed to initialize NusaWhisper:", error);
-      this.ui.showToast("Failed to initialize app", "error");
+      if (this.ui && this.ui.showToast) {
+        this.ui.showToast("Failed to initialize app", "error");
+      }
     }
   }
 
@@ -165,7 +183,11 @@ class DecentralChat {
       .addEventListener("click", () => {
         this.ui.hideRoomOptionsModal();
       });
-
+    document
+      .getElementById("closeMemberOptionsModal")
+      .addEventListener("click", () => {
+        this.ui.hideMemberOptionsModal();
+      });
     // Direct chat
     document.getElementById("directChatBtn").addEventListener("click", () => {
       this.ui.showDirectChatModal();
@@ -240,6 +262,40 @@ class DecentralChat {
         if (e.target.id === "roomOptionsModal") {
           this.ui.hideRoomOptionsModal();
         }
+      });
+
+    // Tab switching
+    document.getElementById("roomsTab")?.addEventListener("click", () => {
+      this.ui.switchTab("rooms");
+    });
+
+    document.getElementById("contactsTab")?.addEventListener("click", () => {
+      this.ui.switchTab("contacts");
+      this.updateContactsList();
+    });
+
+    // Language switching
+    document
+      .getElementById("languageSelect")
+      ?.addEventListener("change", (e) => {
+        this.ui.switchLanguage(e.target.value);
+      });
+
+    // Invite user to room
+    document.getElementById("inviteUserBtn")?.addEventListener("click", () => {
+      this.ui.showInviteUserModal();
+    });
+
+    document
+      .getElementById("inviteUserConfirm")
+      ?.addEventListener("click", () => {
+        this.handleInviteUser();
+      });
+
+    document
+      .getElementById("cancelInviteUser")
+      ?.addEventListener("click", () => {
+        this.ui.hideInviteUserModal();
       });
 
     // Handle wallet account changes
@@ -344,6 +400,15 @@ class DecentralChat {
 
     if (!message || !this.currentUser) return;
 
+    // Prevent sending messages on welcome screen
+    if (this.chat.currentChatType === "welcome") {
+      this.ui.showToast(
+        "Please join a room or start a direct chat first",
+        "warning"
+      );
+      return;
+    }
+
     try {
       await this.chat.sendMessage(message, this.currentUser);
       messageInput.value = "";
@@ -424,7 +489,6 @@ class DecentralChat {
 
       const roomId = await this.chat.createRoom(roomName, isPrivate);
       this.ui.hideCreateRoomModal();
-      this.ui.updateRoomList(this.chat.userRooms);
       this.ui.showToast(`Room "${roomName}" created successfully!`, "success");
 
       // Clear form
@@ -448,7 +512,6 @@ class DecentralChat {
 
       const roomName = await this.chat.joinByInvite(inviteCode);
       this.ui.hideJoinInviteModal();
-      this.ui.updateRoomList(this.chat.userRooms);
       this.ui.showToast(`Joined room successfully!`, "success");
 
       // Clear form
@@ -493,8 +556,8 @@ class DecentralChat {
 
   async handleLeaveRoom() {
     try {
-      if (this.chat.currentRoom === "general") {
-        this.ui.showToast("Cannot leave the general room", "warning");
+      if (this.chat.currentRoom === "welcome") {
+        this.ui.showToast("Cannot leave the welcome screen", "warning");
         return;
       }
 
@@ -505,7 +568,6 @@ class DecentralChat {
 
       await this.chat.leaveRoom(this.chat.currentRoom);
       this.ui.hideRoomOptionsModal();
-      this.ui.updateRoomList(this.chat.userRooms);
       this.ui.showToast("Left room successfully", "success");
     } catch (error) {
       console.error("Failed to leave room:", error);
@@ -576,6 +638,155 @@ class DecentralChat {
       this.ui.showToast("Failed to switch room", "error");
     }
   }
+
+  // Update contacts list in UI
+  updateContactsList() {
+    if (this.chat) {
+      this.ui.updateContactsList(this.chat.contacts);
+    }
+  }
+
+  // Handle starting direct chat with contact
+  async handleStartDirectChatWithContact(address) {
+    try {
+      await this.chat.startDirectChat(address);
+      this.ui.hideMobileSidebar();
+      this.ui.showToast(this.i18n.t("messages.directChatStarted"), "success");
+    } catch (error) {
+      console.error("Failed to start direct chat:", error);
+      this.ui.showToast(this.i18n.t("messages.failedStartChat"), "error");
+    }
+  }
+
+  // Handle inviting user to room
+  async handleInviteUser() {
+    try {
+      const userAddress = document
+        .getElementById("inviteUserAddress")
+        ?.value?.trim();
+
+      if (!userAddress) {
+        const message = this.i18n
+          ? this.i18n.t("messages.enterWalletAddress")
+          : "Please enter a wallet address";
+        this.ui.showToast(message, "warning");
+        return;
+      }
+
+      if (!Utils.isValidEthereumAddress(userAddress)) {
+        const message = this.i18n
+          ? this.i18n.t("messages.invalidWalletAddress")
+          : "Invalid wallet address";
+        this.ui.showToast(message, "error");
+        return;
+      }
+
+      if (userAddress === this.currentUser.address) {
+        this.ui.showToast("Cannot invite yourself", "error");
+        return;
+      }
+
+      if (this.chat && this.chat.inviteUserToRoom) {
+        await this.chat.inviteUserToRoom(this.chat.currentRoom, userAddress);
+        this.ui.hideInviteUserModal();
+        this.ui.showToast("User invited successfully!", "success");
+      } else {
+        throw new Error("Chat not properly initialized");
+      }
+    } catch (error) {
+      console.error("Failed to invite user:", error);
+      this.ui.showToast(error.message || "Failed to invite user", "error");
+    }
+  }
+
+  // Member moderation handlers
+  async handleKickMember() {
+    try {
+      if (!this.ui.currentMemberInfo) return;
+
+      const confirmed = confirm(
+        `Are you sure you want to kick ${
+          this.ui.currentMemberInfo.nickname ||
+          Utils.shortenAddress(this.ui.currentMemberInfo.address)
+        }?`
+      );
+      if (!confirmed) return;
+
+      await this.chat.kickMember(
+        this.chat.currentRoom,
+        this.ui.currentMemberInfo.address
+      );
+      this.ui.hideMemberOptionsModal();
+      this.ui.showToast("Member kicked successfully", "success");
+    } catch (error) {
+      console.error("Failed to kick member:", error);
+      this.ui.showToast(error.message || "Failed to kick member", "error");
+    }
+  }
+
+  async handleBanMember() {
+    try {
+      if (!this.ui.currentMemberInfo) return;
+
+      const confirmed = confirm(
+        `Are you sure you want to ban ${
+          this.ui.currentMemberInfo.nickname ||
+          Utils.shortenAddress(this.ui.currentMemberInfo.address)
+        }? This action cannot be undone.`
+      );
+      if (!confirmed) return;
+
+      await this.chat.banMember(
+        this.chat.currentRoom,
+        this.ui.currentMemberInfo.address
+      );
+      this.ui.hideMemberOptionsModal();
+      this.ui.showToast("Member banned successfully", "success");
+    } catch (error) {
+      console.error("Failed to ban member:", error);
+      this.ui.showToast(error.message || "Failed to ban member", "error");
+    }
+  }
+
+  async handlePromoteMember() {
+    try {
+      if (!this.ui.currentMemberInfo) return;
+
+      const confirmed = confirm(
+        `Are you sure you want to promote ${
+          this.ui.currentMemberInfo.nickname ||
+          Utils.shortenAddress(this.ui.currentMemberInfo.address)
+        } to moderator?`
+      );
+      if (!confirmed) return;
+
+      await this.chat.promoteToModerator(
+        this.chat.currentRoom,
+        this.ui.currentMemberInfo.address
+      );
+      this.ui.hideMemberOptionsModal();
+      this.ui.showToast("Member promoted successfully", "success");
+    } catch (error) {
+      console.error("Failed to promote member:", error);
+      this.ui.showToast(error.message || "Failed to promote member", "error");
+    }
+  }
+
+  async handleDirectChatWithMember() {
+    try {
+      if (!this.ui.currentMemberInfo) return;
+
+      await this.chat.startDirectChat(this.ui.currentMemberInfo.address);
+      this.ui.hideMemberOptionsModal();
+      this.ui.showToast("Direct chat started", "success");
+    } catch (error) {
+      console.error("Failed to start direct chat:", error);
+      this.ui.showToast(
+        error.message || "Failed to start direct chat",
+        "error"
+      );
+    }
+  }
 }
 
 // Initialize the app when DOM is loaded
@@ -585,19 +796,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Handle page visibility changes
 document.addEventListener("visibilitychange", () => {
-  if (window.app && window.app.chat) {
+  if (window.app && window.app.chat && window.app.chat.setOnlineStatus) {
     if (document.hidden) {
-      window.app.chat.setOnlineStatus(false);
+      window.app.chat.setUserOffline();
     } else {
-      window.app.chat.setOnlineStatus(window.app.chat.isOnlineVisible);
+      window.app.chat.setUserOnline();
     }
   }
 });
 
 // Handle before unload
 window.addEventListener("beforeunload", () => {
-  if (window.app && window.app.chat) {
-    window.app.chat.setOnlineStatus(false);
+  if (window.app && window.app.chat && window.app.chat.setUserOffline) {
+    window.app.chat.setUserOffline();
   }
 });
 

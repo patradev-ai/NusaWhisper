@@ -6,6 +6,8 @@ class UI {
     this.toastQueue = [];
     this.maxToasts = 3;
     this.currentUserInfoAddress = null;
+    this.currentTab = "rooms"; // "rooms" or "contacts"
+    this.i18n = null;
 
     this.init();
   }
@@ -300,7 +302,9 @@ class UI {
 
   createRoomElement(roomId, isActive = false) {
     const roomDiv = document.createElement("div");
-    roomDiv.className = `room-item ${isActive ? "active" : ""}`;
+    roomDiv.className = `room-item flex items-center gap-3 p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 cursor-pointer ${
+      isActive ? "active bg-slate-200 dark:bg-slate-700 font-semibold" : ""
+    }`;
     roomDiv.onclick = () => {
       if (window.app) {
         window.app.handleRoomSwitch(roomId);
@@ -594,6 +598,199 @@ class UI {
     if (indicator) {
       indicator.remove();
     }
+  }
+
+  // Tab management
+  switchTab(tabName) {
+    this.currentTab = tabName;
+
+    // Update tab buttons
+    document.querySelectorAll(".tab-button").forEach((button) => {
+      button.classList.remove("active");
+    });
+    document.getElementById(`${tabName}Tab`).classList.add("active");
+
+    // Update content visibility
+    document
+      .getElementById("roomsContent")
+      .classList.toggle("hidden", tabName !== "rooms");
+    document
+      .getElementById("contactsContent")
+      .classList.toggle("hidden", tabName !== "contacts");
+  }
+
+  // Update contacts list
+  updateContactsList(contacts) {
+    const container = document.getElementById("contactsList");
+    if (!container) return;
+
+    container.innerHTML = "";
+
+    const contactsArray = Array.from(contacts.values());
+    contactsArray.sort((a, b) => b.lastMessageAt - a.lastMessageAt);
+
+    contactsArray.forEach((contact) => {
+      const contactElement = this.createContactElement(contact);
+      container.appendChild(contactElement);
+    });
+  }
+
+  // Create contact element
+  createContactElement(contact) {
+    const contactDiv = document.createElement("div");
+    contactDiv.className =
+      "contact-item flex items-center space-x-3 p-3 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg cursor-pointer transition-colors";
+    contactDiv.onclick = () => {
+      if (window.app) {
+        window.app.handleStartDirectChatWithContact(contact.address);
+      }
+    };
+
+    const avatar = document.createElement("div");
+    avatar.className =
+      "w-10 h-10 bg-gradient-to-br from-web3-cyan to-web3-purple rounded-full flex items-center justify-center";
+    avatar.innerHTML = `<span class="text-white text-sm font-bold">${contact.address
+      .substring(2, 4)
+      .toUpperCase()}</span>`;
+
+    const contactInfo = document.createElement("div");
+    contactInfo.className = "flex-1";
+
+    const nickname = document.createElement("div");
+    nickname.className = "text-sm font-medium text-slate-800 dark:text-white";
+    nickname.textContent =
+      contact.nickname || Utils.shortenAddress(contact.address);
+
+    const lastMessage = document.createElement("div");
+    lastMessage.className = "text-xs text-slate-500 dark:text-slate-400";
+    lastMessage.textContent = Utils.formatTime(contact.lastMessageAt);
+
+    contactInfo.appendChild(nickname);
+    contactInfo.appendChild(lastMessage);
+
+    contactDiv.appendChild(avatar);
+    contactDiv.appendChild(contactInfo);
+
+    return contactDiv;
+  }
+
+  // Language switching
+  async switchLanguage(language) {
+    if (this.i18n) {
+      const success = await this.i18n.setLanguage(language);
+      if (success) {
+        this.showToast(this.i18n.t("messages.languageChanged"), "success");
+      }
+    }
+  }
+
+  // Initialize i18n
+  setI18n(i18n) {
+    if (i18n) {
+      this.i18n = i18n;
+    }
+  }
+
+  // Enhanced theme toggle with better coverage
+  toggleTheme() {
+    this.currentTheme = this.currentTheme === "light" ? "dark" : "light";
+    localStorage.setItem("theme", this.currentTheme);
+    this.applyTheme();
+    this.updateThemeToggleIcon();
+
+    // Show toast notification with i18n
+    const message = this.i18n
+      ? this.i18n.t("messages.switchedTheme", { theme: this.currentTheme })
+      : `Switched to ${this.currentTheme} theme`;
+    this.showToast(message, "info");
+  }
+
+  // Show invite user modal
+  showInviteUserModal() {
+    const modal = document.getElementById("inviteUserModal");
+    modal.classList.remove("hidden");
+
+    setTimeout(() => {
+      document.getElementById("inviteUserAddress").focus();
+    }, 100);
+  }
+
+  hideInviteUserModal() {
+    const modal = document.getElementById("inviteUserModal");
+    modal.classList.add("hidden");
+    document.getElementById("inviteUserAddress").value = "";
+  }
+
+  // Member options modal
+  showMemberOptionsModal(member, userPermissions) {
+    this.currentMemberInfo = member;
+    const modal = document.getElementById("memberOptionsModal");
+    const memberName = document.getElementById("memberOptionsName");
+    const memberRole = document.getElementById("memberOptionsRole");
+    const memberAddress = document.getElementById("memberOptionsAddress");
+
+    if (memberName)
+      memberName.textContent =
+        member.nickname || Utils.shortenAddress(member.address);
+    if (memberRole)
+      memberRole.textContent =
+        member.role.charAt(0).toUpperCase() + member.role.slice(1);
+    if (memberAddress)
+      memberAddress.textContent = Utils.shortenAddress(member.address);
+
+    // Show/hide action buttons based on permissions
+    const kickBtn = document.getElementById("kickMemberBtn");
+    const banBtn = document.getElementById("banMemberBtn");
+    const promoteBtn = document.getElementById("promoteMemberBtn");
+    const directChatBtn = document.getElementById("directChatMemberBtn");
+
+    if (kickBtn)
+      kickBtn.style.display = userPermissions.kick ? "block" : "none";
+    if (banBtn) banBtn.style.display = userPermissions.ban ? "block" : "none";
+    if (promoteBtn)
+      promoteBtn.style.display = userPermissions.moderate ? "block" : "none";
+    if (directChatBtn) directChatBtn.style.display = "block";
+
+    modal.classList.remove("hidden");
+  }
+  hideMemberOptionsModal() {
+    const modal = document.getElementById("memberOptionsModal");
+    if (modal) {
+      modal.classList.add("hidden");
+    } else {
+      console.warn("Modal element not found: #memberOptionsModal");
+    }
+
+    if (this && typeof this.currentMemberInfo !== "undefined") {
+      this.currentMemberInfo = null;
+    }
+  }
+  // Connection status indicator
+  showConnectionStatus(status) {
+    const indicator = document.getElementById("connectionIndicator");
+    if (indicator) {
+      indicator.className = `connection-indicator ${status}`;
+    }
+  }
+
+  // Security alert
+  showSecurityAlert(message, type = "warning") {
+    const alert = document.createElement("div");
+    alert.className = `fixed top-4 left-1/2 transform -translate-x-1/2 bg-${
+      type === "error" ? "red" : "yellow"
+    }-500 text-white px-4 py-2 rounded-lg shadow-lg z-50`;
+    alert.innerHTML = `
+      <i class="fas fa-exclamation-triangle mr-2"></i>
+      ${message}
+    `;
+
+    document.body.appendChild(alert);
+
+    setTimeout(() => {
+      if (alert.parentNode) {
+        alert.remove();
+      }
+    }, 5000);
   }
 }
 
