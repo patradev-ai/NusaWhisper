@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>NusaWhisper - Room-Based Chat App</title>
+    <title>NusaWhisper - Decentralized Web3 Chat App</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gun/sea.js"></script>
@@ -22,7 +22,7 @@
         class="hidden lg:flex flex-col w-80 bg-gray-50 dark:bg-gray-900 border-r border-gray-200 dark:border-gray-700"
       >
         <!-- Sidebar Header -->
-        <div class="p-4 border-b border-gray-200 dark:border-gray-700">
+        <div class="p-4 pb-1 border-b border-gray-200 dark:border-gray-700">
           <div class="flex items-center space-x-3 mb-4">
             <i class="fas fa-comments text-2xl text-blue-500"></i>
             <h1 class="text-xl font-bold text-gray-800 dark:text-white">
@@ -55,16 +55,16 @@
 
         <!-- Room List -->
         <div class="flex-1 overflow-y-auto">
-          <div class="p-3">
-            <h3
+          <!-- <div class="p-3"> -->
+          <!-- <h3
               class="text-sm font-semibold text-gray-600 dark:text-gray-400 mb-2"
             >
               ROOMS
             </h3>
-            <div id="roomList" class="space-y-1">
-              <!-- Rooms will be populated here -->
-            </div>
-          </div>
+            <div id="roomList" class="space-y-1"> -->
+          <!-- Rooms will be populated here -->
+          <!-- </div> -->
+          <!-- </div> -->
 
           <!-- Online Users -->
           <div class="p-3 border-t border-gray-200 dark:border-gray-700">
@@ -273,7 +273,7 @@
                 <i class="fas fa-times text-gray-600 dark:text-gray-400"></i>
               </button>
             </div>
-            <div class="flex space-x-2">
+            <div class="flex space-x-2 hidden">
               <button
                 id="createRoomBtnMobile"
                 class="flex-1 bg-blue-500 hover:bg-blue-600 text-white text-sm py-2 px-3 rounded-lg transition-colors duration-200"
@@ -281,6 +281,7 @@
                 <i class="fas fa-plus mr-1"></i>
                 Create Room
               </button>
+
               <button
                 id="joinInviteBtnMobile"
                 class="flex-1 bg-green-500 hover:bg-green-600 text-white text-sm py-2 px-3 rounded-lg transition-colors duration-200"
@@ -292,7 +293,7 @@
           </div>
 
           <div class="flex-1 overflow-y-auto">
-            <div class="p-3">
+            <div class="p-3 hidden">
               <h3
                 class="text-sm font-semibold text-gray-600 dark:text-gray-400 mb-2"
               >
@@ -302,7 +303,15 @@
                 <!-- Rooms will be populated here -->
               </div>
             </div>
-
+            <div class="p-3">
+              <button
+                id="directChatBtn"
+                class="flex-1 bg-blue-500 hover:bg-blue-600 text-white text-sm py-2 px-3 rounded-lg transition-colors duration-200"
+              >
+                <i class="fas fa-plus mr-1"></i>
+                Direct Chat
+              </button>
+            </div>
             <div class="p-3 border-t border-gray-200 dark:border-gray-700">
               <h3
                 class="text-sm font-semibold text-gray-600 dark:text-gray-400 mb-2"
@@ -440,7 +449,7 @@
                 class="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg transition-colors duration-200"
               >
                 <i class="fas fa-envelope mr-2"></i>
-                Send Direct Message
+                Direct Message
               </button>
             </div>
           </div>

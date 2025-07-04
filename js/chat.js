@@ -354,9 +354,7 @@ class Chat {
 
     const messageBubble = document.createElement("div");
     messageBubble.className = `message-bubble p-3 ${
-      isOwn
-        ? "message-own text-white"
-        : "message-other text-gray-800 dark:text-white"
+      isOwn ? "message-own text-white" : "message-other text-gray-700"
     }`;
 
     const messageText = document.createElement("div");
